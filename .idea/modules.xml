@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/005_trisSocket/005_trisSocket.iml" filepath="$PROJECT_DIR$/005_trisSocket/005_trisSocket.iml" />
+      <module fileurl="file://$PROJECT_DIR$/005_trisSocket_client/005_trisSocket_client.iml" filepath="$PROJECT_DIR$/005_trisSocket_client/005_trisSocket_client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/TrisSocket.iml" filepath="$PROJECT_DIR$/.idea/TrisSocket.iml" />
+    </modules>
+  </component>
+</project>
