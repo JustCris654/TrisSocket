@@ -14,7 +14,7 @@ public class TrisMatchHandler extends Thread {
     private final PrintWriter output_client2;
     private final BufferedReader input_client2;
 
-    private MatchInfo matchInfo;
+    private final MatchInfo matchInfo;
 
     private boolean matchOver;
 
@@ -93,6 +93,13 @@ public class TrisMatchHandler extends Thread {
             lastMove = Integer.toString(move);
 
             matchInfo.nextTurn();
+
+            int winner = matchInfo.matchEnded();
+            if (winner != 0) {
+                matchOver = true;
+                output_client1.println("ha vinto " + winner);
+                output_client2.println("ha vinto " + winner);
+            }
 
             // int[][] matrix = matchInfo.getMatrix();
             // System.out.println(Arrays.deepToString(matrix));

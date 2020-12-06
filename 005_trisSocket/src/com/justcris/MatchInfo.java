@@ -45,8 +45,75 @@ public class MatchInfo {
     }
 
     //controllo se qualcuno ha vinto
-    // public boolean checkMatch(){
+    public int matchEnded() {
+        int num = -1;
+        int numSame = 0;
 
-    // }
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (num == -1) {
+                    num = matrix[i][j];
+                    numSame++;
+                } else {
+                    if (num == matrix[i][j])
+                        numSame++;
+                }
+                if (numSame == 3) {
+                    return num;
+                }
+            }
+        }
+
+        numSame = 0;
+        num = -1;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (num == -1) {
+                    num = matrix[j][i];
+                    numSame++;
+                } else {
+                    if (num == matrix[j][i])
+                        numSame++;
+                }
+                if (numSame == 3) {
+                    return num;
+                }
+            }
+        }
+
+        numSame = 0;
+        num = -1;
+        for (int i = 0; i < 3; i++) {
+            if (num == -1) {
+                num = matrix[i][i];
+                numSame++;
+            } else {
+                if (num == matrix[i][i])
+                    numSame++;
+            }
+            if (numSame == 3) {
+                return num;
+            }
+        }
+
+        numSame = 0;
+        num = -1;
+        for (int i = 0; i < 3; i++) {
+
+            if (num == -1) {
+                num = matrix[i][2 - i];
+                numSame++;
+            } else {
+                if (num == matrix[i][2 - i])
+                    numSame++;
+            }
+            if (numSame == 3) {
+                return num;
+            }
+
+        }
+
+        return 0;
+    }
 
 }

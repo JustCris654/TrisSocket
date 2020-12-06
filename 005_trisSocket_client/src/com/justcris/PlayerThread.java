@@ -27,50 +27,24 @@ public class PlayerThread extends Thread {
         }
         System.out.println(playerData.message);
 
-        while (true) {
+        boolean matchOver = false;
+
+        while (!matchOver) {
             try {
                 playerData.message = playerData.input.readLine();           //ricevo in input un messaggio dal server
             } catch (IOException e) {
                 e.printStackTrace();
             }
 
-            System.out.println(playerData.message);
-
-            if (playerData.message.equals("turn")) {
-                playerData.turn = playerData.playerID;
-                playerData.setLabelTurn(true);
-
-                try {
-                    playerData.message = playerData.input.readLine();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
+            if (playerData.message.equals("ha vinto 1") || playerData.message.equals("ha vinto 2")) {
+                matchOver = true;
+                playerData.setLabelWinner(playerData.message);
+            } else {
                 System.out.println(playerData.message);
 
-                if (!playerData.message.equals("first")) {
-                    playerData.setMove(Integer.parseInt(playerData.message));
-                }
-
-                boolean result;
-
-                do {
+                if (playerData.message.equals("turn")) {
                     playerData.turn = playerData.playerID;
-                    //aspetto che il client fa la sua mossa
-                    while (playerData.getPlayerMove() == -1) {
-                        try {
-                            sleep(50);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                    playerData.turn = null;
-
-                    System.out.println(playerData.getPlayerMove());
-
-                    //quando ha fatto la sua mossa
-                    //invio la mossa al server
-                    playerData.output.println(playerData.playerMove);
+                    playerData.setLabelTurn(true);
 
                     try {
                         playerData.message = playerData.input.readLine();
@@ -80,15 +54,50 @@ public class PlayerThread extends Thread {
 
                     System.out.println(playerData.message);
 
-                    result = (playerData.message.equals("success"));
+                    if (!playerData.message.equals("first")) {
+                        playerData.setMove(Integer.parseInt(playerData.message));
+                    }
 
-                    //resetto la mossa fatta dal giocatore
-                    playerData.resetPlayerMove();
-                } while(!result);
+                    boolean result;
 
-                playerData.turn = null;
+                    do {
+                        playerData.turn = playerData.playerID;
+                        //aspetto che il client fa la sua mossa
+                        while (playerData.getPlayerMove() == -1) {
+                            try {
+                                sleep(202);
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        playerData.turn = null;
+
+                        System.out.println(playerData.getPlayerMove());
+
+                        //quando ha fatto la sua mossa
+                        //invio la mossa al server
+                        playerData.output.println(playerData.playerMove);
+
+                        try {
+                            playerData.message = playerData.input.readLine();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        System.out.println(playerData.message);
+
+                        result = (playerData.message.equals("success"));
+
+                        //resetto la mossa fatta dal giocatore
+                        playerData.resetPlayerMove();
+                    } while (!result);
+
+                    playerData.turn = null;
+                }
+                playerData.setLabelTurn(false);
+
             }
-            playerData.setLabelTurn(false);
+
 
         }
 

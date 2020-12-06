@@ -274,6 +274,12 @@ public class PlayerForm {
         }
     }
 
+    public void setLabelWinner(String text){
+        lbl_turn.setText(text);
+    }
+
+
+
     public static void main(String[] args) {
         JFrame frame = new JFrame("Tris");
         frame.setContentPane(new PlayerForm().trisFormPanel);
